@@ -78,7 +78,7 @@ goto selectVer
 :downloadVer
 git clone https://github.com/LostCityRS/Engine-TS engine -b %rev% --single-branch
 git clone https://github.com/LostCityRS/Content content -b %rev% --single-branch
-git clone https://github.com/LostCityRS/Client-TS webclient -b %rev% --single-branch
+git clone https://github.com/JaegarSarauer/Client-TS webclient -b %rev% --single-branch
 goto index
 
 :startProj
