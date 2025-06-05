@@ -66,9 +66,9 @@ selectVer () {
 
 	read -p "" rev
 	if [ "$rev" = "225" ]; then
-		git clone https://github.com/JaegarSarauer/Engine-TS engine -b $rev --single-branch
-		git clone https://github.com/JaegarSarauer/Content content -b $rev --single-branch
-		git clone https://github.com/JaegarSarauer/Client-TS webclient -b $rev --single-branch
+		git clone https://github.com/BotCityRS/Engine-TS engine -b $rev --single-branch
+		git clone https://github.com/BotCityRS/Content content -b $rev --single-branch
+		git clone https://github.com/BotCityRS/Client-TS webclient -b $rev --single-branch
 		index
 	else
 		clear
