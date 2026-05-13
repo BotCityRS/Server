@@ -63,12 +63,23 @@ selectVer () {
 	echo Please select a game version - use the number to confirm your option:
 	echo 225. May 18, 2004
 	echo 244. June 28, 2004
+	echo 254. LostCityRS 254 branch
 
 	read -p "" rev
 	if [ "$rev" = "225" ]; then
-		git clone https://github.com/BotCityRS/Engine-TS engine -b $rev --single-branch
-		git clone https://github.com/BotCityRS/Content content -b $rev --single-branch
-		git clone https://github.com/BotCityRS/Client-TS webclient -b $rev --single-branch
+		git clone https://github.com/BotCityRS/Engine-TS engine -b bot --single-branch
+		git clone https://github.com/BotCityRS/Content content -b bot --single-branch
+		git clone https://github.com/BotCityRS/Client-TS webclient -b bot --single-branch
+		index
+	elif [ "$rev" = "244" ]; then
+		git clone https://github.com/BotCityRS/Engine-TS engine -b bot --single-branch
+		git clone https://github.com/BotCityRS/Content content -b bot --single-branch
+		git clone https://github.com/BotCityRS/Client-TS webclient -b bot --single-branch
+		index
+	elif [ "$rev" = "254" ]; then
+		git clone https://github.com/BotCityRS/Engine-TS engine -b bot --single-branch
+		git clone https://github.com/BotCityRS/Content content -b bot --single-branch
+		git clone https://github.com/BotCityRS/Client-TS webclient -b bot --single-branch
 		index
 	else
 		clear
@@ -94,17 +105,13 @@ startProj () {
 }
 
 updateProj () {
-	cd engine
-	git pull
-    cd ..
-
-	cd content
-	git pull
-    cd ..
-
-	cd webclient
-	git pull
-	cd ..
+	# Pull from BotCityRS (default `git pull` uses origin, often a missing personal fork).
+	for dir in engine content webclient; do
+		cd "$dir" || exit 1
+		branch=$(git rev-parse --abbrev-ref HEAD)
+		git pull BotCityRS "$branch" || exit 1
+		cd ..
+	done
 
 	index
 }
